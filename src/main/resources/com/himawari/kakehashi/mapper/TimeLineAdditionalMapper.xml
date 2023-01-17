@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.TimelineAdditionalMapper">
+    <resultMap id="selectTimeLineMap" type="com.himawari.kakehashi.domain.TimeLineAdditional">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="zone_name" jdbcType="VARCHAR" property="zoneName"/>
+        <result column="ward_name" jdbcType="VARCHAR" property="wardName"/>
+        <result column="headquarter_name" jdbcType="VARCHAR" property="headquarterName"/>
+        <result column="member_name" jdbcType="VARCHAR" property="memberName"/>
+        <result column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <result column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+    </resultMap>
+    <select id="selectTimeLineAll" parameterType="com.himawari.kakehashi.domain.TimeLineAdditional"
+            resultMap="selectTimeLineMap">
+        SELECT timeline.id id
+        ,zone_name
+        ,ward_name
+        ,headquarter_name
+        ,member_name
+        ,timeline.zone_id zone_id
+        ,timeline.ward_id ward_id
+        ,timeline.headquarter_id headquarter_id
+        ,timeline.member_id member_id
+        ,timeline.comment comment
+        ,timeline.img img
+        ,timeline.updatedby updatedby
+        ,timeline.updatedat updatedat
+        ,timeline.createdby createdby
+        ,timeline.createdat createdat
+        FROM timeline
+        INNER JOIN zone
+        ON timeline.zone_id = zone.id
+        INNER JOIN ward
+        ON timeline.ward_id = ward.id
+        INNER JOIN headquarter
+        ON timeline.headquarter_id = headquarter.id
+        INNER JOIN member
+        ON timeline.member_id = member.id;
+    </select>
+    <select id="selectTimeLineZone" parameterType="com.himawari.kakehashi.domain.TimeLineAdditional"
+            resultMap="selectTimeLineMap">
+        SELECT timeline.id id
+        ,zone_name
+        ,ward_name
+        ,headquarter_name
+        ,member_name
+        ,timeline.zone_id zone_id
+        ,timeline.ward_id ward_id
+        ,timeline.headquarter_id headquarter_id
+        ,timeline.member_id member_id
+        ,timeline.comment comment
+        ,timeline.img
+        ,timeline.updatedby updatedby
+        ,timeline.updatedat updatedat
+        ,timeline.createdby createdby
+        ,timeline.createdat createdat
+        FROM timeline
+        INNER JOIN zone
+        ON timeline.zone_id = zone.id
+        INNER JOIN ward
+        ON timeline.ward_id = ward.id
+        INNER JOIN headquarter
+        ON timeline.headquarter_id = headquarter.id
+        INNER JOIN member
+        ON timeline.member_id = member.id
+        WHERE
+        timeline.zone_id = #{zoneId};
+    </select>
+
+    <select id="selectTimeLineWard" parameterType="com.himawari.kakehashi.domain.TimeLineAdditional"
+            resultMap="selectTimeLineMap">
+        SELECT timeline.id id
+        ,zone_name
+        ,ward_name
+        ,headquarter_name
+        ,member_name
+        ,timeline.zone_id zone_id
+        ,timeline.ward_id ward_id
+        ,timeline.headquarter_id headquarter_id
+        ,timeline.member_id member_id
+        ,timeline.comment comment
+        ,timeline.img
+        ,timeline.updatedby updatedby
+        ,timeline.updatedat updatedat
+        ,timeline.createdby createdby
+        ,timeline.createdat createdat
+        FROM timeline
+        INNER JOIN zone
+        ON timeline.zone_id = zone.id
+        INNER JOIN ward
+        ON timeline.ward_id = ward.id
+        INNER JOIN headquarter
+        ON timeline.headquarter_id = headquarter.id
+        INNER JOIN member
+        ON timeline.member_id = member.id
+        WHERE
+        timeline.zone_id = #{zoneId}
+        timeline.ward_id = #{wardId}
+    </select>
+
+    <select id="selectTimeLineHeadquarter" parameterType="com.himawari.kakehashi.domain.TimeLineAdditional"
+            resultMap="selectTimeLineMap">
+        SELECT timeline.id id
+        ,zone_name
+        ,ward_name
+        ,headquarter_name
+        ,member_name
+        ,timeline.zone_id zone_id
+        ,timeline.ward_id ward_id
+        ,timeline.headquarter_id headquarter_id
+        ,timeline.member_id member_id
+        ,timeline.comment comment
+        ,timeline.img
+        ,timeline.updatedby updatedby
+        ,timeline.updatedat updatedat
+        ,timeline.createdby createdby
+        ,timeline.createdat createdat
+        FROM timeline
+        INNER JOIN zone
+        ON timeline.zone_id = zone.id
+        INNER JOIN ward
+        ON timeline.ward_id = ward.id
+        INNER JOIN headquarter
+        ON timeline.headquarter_id = headquarter.id
+        INNER JOIN member
+        ON timeline.member_id = member.id
+        WHERE
+        timeline.zone_id = #{zoneId}
+        timeline.ward_id = #{wardId}
+        timeline.headquarter_id = #{headquarterId}
+    </select>
+
+    <update id="updateByKeySelective" parameterType="com.himawari.kakehashi.domain.Timeline">
+        update timeline
+        <set>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedby != null">
+                updatedby = #{updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedat != null">
+                updatedat = #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        and id = #{id,jdbcType=INTEGER}
+        and member_id = #{memberId,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo Application OAuth 2.0 Login with Spring Security 5</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()" style="float: right" th:fragment="logout">
+    <div style="float:left">
+        <span style="font-weight:bold">User Id:</span>
+        <span sec:authentication="name">1000000</span>
+        <!-- 権限情報としてROLE_OAUTH_USERをもつユーザのみ表示 -->
+        <span sec:authorize="hasRole('OAUTH_USER')">
+      <span style="font-weight:bold">User Name:</span>
+      <span sec:authentication="principal.attributes['name']">Taro Yamada</span>
+    </span>
+    </div>
+    <div style="float:none">&nbsp;</div>
+    <div style="float:right">
+        <form action="#" method="post" th:action="@{/logout}">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+</div>
+<h1>Welcome Demo Application OAuth 2.0 Login with Spring Security 5 !!</h1>
+<!-- 権限情報としてROLE_OAUTH_USERをもつユーザのみ表示 -->
+<div sec:authorize="hasRole('OAUTH_USER')">
+    You are successfully logged in via the OAuth 2.0 Client
+
+</div>
+<div>&nbsp;</div>
+<div>
+    <ul>
+        <li>
+            <a href="/templates/userinfo.html" th:href="@{/attributes}">Display User Attributes at login</a>
+        </li>
+        <li>
+            <a href="/templates/userinfo.html" th:href="@{/attributes/latest}">Display latest User Attributes</a>
+        </li>
+        <!-- 権限情報としてROLE_DEVELOPERをもつユーザのみ表示（＝GitHubの有料プランアカウントでログインした時だけ表示される） -->
+        <li sec:authorize-url="/developer/menu">
+            <a href="/templates/developer.html" th:href="@{/developer/menu}">Developer Menu</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

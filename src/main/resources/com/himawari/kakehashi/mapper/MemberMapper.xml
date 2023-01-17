@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.himawari.kakehashi.domain.Member">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="district_id" jdbcType="INTEGER" property="districtId"/>
+        <id column="branch_id" jdbcType="INTEGER" property="branchId"/>
+        <id column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <id column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <id column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="member_name" jdbcType="VARCHAR" property="memberName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="can_visit" jdbcType="TINYINT" property="canVisit"/>
+        <result column="citizen_id" jdbcType="INTEGER" property="citizenId"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="examination_id" jdbcType="INTEGER" property="examinationId"/>
+        <result column="school_id" jdbcType="INTEGER" property="schoolId"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+        <result column="updatedby" jdbcType="VARCHAR" property="updatedby"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        id, district_id, branch_id, headquarter_id, ward_id, zone_id, uuid, member_name,
+        address, grade, birthday, note, mobile_phone, phone, can_visit, citizen_id, position_id,
+        examination_id, school_id, createdat, createdby, updatedat, updatedby
+    </sql>
+    <select id="selectByExample" parameterType="com.himawari.kakehashi.domain.MemberExample" resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where id = #{id,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from member
+        where id = #{id,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.himawari.kakehashi.domain.MemberExample">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Member"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into member (district_id, branch_id, headquarter_id,
+        ward_id, zone_id, uuid,
+        member_name, address, grade,
+        birthday, note, mobile_phone,
+        phone, can_visit, citizen_id,
+        position_id, examination_id, school_id,
+        createdat, createdby, updatedat,
+        updatedby)
+        values (#{districtId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{headquarterId,jdbcType=INTEGER},
+        #{wardId,jdbcType=INTEGER}, #{zoneId,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR},
+        #{memberName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR},
+        #{birthday,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR}, #{canVisit,jdbcType=TINYINT}, #{citizenId,jdbcType=INTEGER},
+        #{positionId,jdbcType=INTEGER}, #{examinationId,jdbcType=INTEGER}, #{schoolId,jdbcType=INTEGER},
+        #{createdat,jdbcType=TIMESTAMP}, #{createdby,jdbcType=VARCHAR}, #{updatedat,jdbcType=TIMESTAMP},
+        #{updatedby,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Member"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="districtId != null">
+                district_id,
+            </if>
+            <if test="branchId != null">
+                branch_id,
+            </if>
+            <if test="headquarterId != null">
+                headquarter_id,
+            </if>
+            <if test="wardId != null">
+                ward_id,
+            </if>
+            <if test="zoneId != null">
+                zone_id,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="memberName != null">
+                member_name,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="note != null">
+                note,
+            </if>
+            <if test="mobilePhone != null">
+                mobile_phone,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="canVisit != null">
+                can_visit,
+            </if>
+            <if test="citizenId != null">
+                citizen_id,
+            </if>
+            <if test="positionId != null">
+                position_id,
+            </if>
+            <if test="examinationId != null">
+                examination_id,
+            </if>
+            <if test="schoolId != null">
+                school_id,
+            </if>
+            <if test="createdat != null">
+                createdat,
+            </if>
+            <if test="createdby != null">
+                createdby,
+            </if>
+            <if test="updatedat != null">
+                updatedat,
+            </if>
+            <if test="updatedby != null">
+                updatedby,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="districtId != null">
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="branchId != null">
+                #{branchId,jdbcType=INTEGER},
+            </if>
+            <if test="headquarterId != null">
+                #{headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="wardId != null">
+                #{wardId,jdbcType=INTEGER},
+            </if>
+            <if test="zoneId != null">
+                #{zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null">
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="mobilePhone != null">
+                #{mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="canVisit != null">
+                #{canVisit,jdbcType=TINYINT},
+            </if>
+            <if test="citizenId != null">
+                #{citizenId,jdbcType=INTEGER},
+            </if>
+            <if test="positionId != null">
+                #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="examinationId != null">
+                #{examinationId,jdbcType=INTEGER},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="createdat != null">
+                #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdby != null">
+                #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedat != null">
+                #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedby != null">
+                #{updatedby,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.himawari.kakehashi.domain.MemberExample" resultType="java.lang.Long">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select count(*) from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update member
+        <set>
+            <if test="row.id != null">
+                id = #{row.id,jdbcType=INTEGER},
+            </if>
+            <if test="row.districtId != null">
+                district_id = #{row.districtId,jdbcType=INTEGER},
+            </if>
+            <if test="row.branchId != null">
+                branch_id = #{row.branchId,jdbcType=INTEGER},
+            </if>
+            <if test="row.headquarterId != null">
+                headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="row.wardId != null">
+                ward_id = #{row.wardId,jdbcType=INTEGER},
+            </if>
+            <if test="row.zoneId != null">
+                zone_id = #{row.zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="row.uuid != null">
+                uuid = #{row.uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="row.memberName != null">
+                member_name = #{row.memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="row.address != null">
+                address = #{row.address,jdbcType=VARCHAR},
+            </if>
+            <if test="row.grade != null">
+                grade = #{row.grade,jdbcType=VARCHAR},
+            </if>
+            <if test="row.birthday != null">
+                birthday = #{row.birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="row.note != null">
+                note = #{row.note,jdbcType=VARCHAR},
+            </if>
+            <if test="row.mobilePhone != null">
+                mobile_phone = #{row.mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="row.phone != null">
+                phone = #{row.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="row.canVisit != null">
+                can_visit = #{row.canVisit,jdbcType=TINYINT},
+            </if>
+            <if test="row.citizenId != null">
+                citizen_id = #{row.citizenId,jdbcType=INTEGER},
+            </if>
+            <if test="row.positionId != null">
+                position_id = #{row.positionId,jdbcType=INTEGER},
+            </if>
+            <if test="row.examinationId != null">
+                examination_id = #{row.examinationId,jdbcType=INTEGER},
+            </if>
+            <if test="row.schoolId != null">
+                school_id = #{row.schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="row.createdat != null">
+                createdat = #{row.createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="row.createdby != null">
+                createdby = #{row.createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="row.updatedat != null">
+                updatedat = #{row.updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="row.updatedby != null">
+                updatedby = #{row.updatedby,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update member
+        set id = #{row.id,jdbcType=INTEGER},
+        district_id = #{row.districtId,jdbcType=INTEGER},
+        branch_id = #{row.branchId,jdbcType=INTEGER},
+        headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+        ward_id = #{row.wardId,jdbcType=INTEGER},
+        zone_id = #{row.zoneId,jdbcType=INTEGER},
+        uuid = #{row.uuid,jdbcType=VARCHAR},
+        member_name = #{row.memberName,jdbcType=VARCHAR},
+        address = #{row.address,jdbcType=VARCHAR},
+        grade = #{row.grade,jdbcType=VARCHAR},
+        birthday = #{row.birthday,jdbcType=VARCHAR},
+        note = #{row.note,jdbcType=VARCHAR},
+        mobile_phone = #{row.mobilePhone,jdbcType=VARCHAR},
+        phone = #{row.phone,jdbcType=VARCHAR},
+        can_visit = #{row.canVisit,jdbcType=TINYINT},
+        citizen_id = #{row.citizenId,jdbcType=INTEGER},
+        position_id = #{row.positionId,jdbcType=INTEGER},
+        examination_id = #{row.examinationId,jdbcType=INTEGER},
+        school_id = #{row.schoolId,jdbcType=INTEGER},
+        createdat = #{row.createdat,jdbcType=TIMESTAMP},
+        createdby = #{row.createdby,jdbcType=VARCHAR},
+        updatedat = #{row.updatedat,jdbcType=TIMESTAMP},
+        updatedby = #{row.updatedby,jdbcType=VARCHAR}
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.himawari.kakehashi.domain.Member">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update member
+        <set>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null">
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="mobilePhone != null">
+                mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="canVisit != null">
+                can_visit = #{canVisit,jdbcType=TINYINT},
+            </if>
+            <if test="citizenId != null">
+                citizen_id = #{citizenId,jdbcType=INTEGER},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="examinationId != null">
+                examination_id = #{examinationId,jdbcType=INTEGER},
+            </if>
+            <if test="schoolId != null">
+                school_id = #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="createdat != null">
+                createdat = #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdby != null">
+                createdby = #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedat != null">
+                updatedat = #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedby != null">
+                updatedby = #{updatedby,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.himawari.kakehashi.domain.Member">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update member
+        set uuid = #{uuid,jdbcType=VARCHAR},
+        member_name = #{memberName,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        grade = #{grade,jdbcType=VARCHAR},
+        birthday = #{birthday,jdbcType=VARCHAR},
+        note = #{note,jdbcType=VARCHAR},
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        can_visit = #{canVisit,jdbcType=TINYINT},
+        citizen_id = #{citizenId,jdbcType=INTEGER},
+        position_id = #{positionId,jdbcType=INTEGER},
+        examination_id = #{examinationId,jdbcType=INTEGER},
+        school_id = #{schoolId,jdbcType=INTEGER},
+        createdat = #{createdat,jdbcType=TIMESTAMP},
+        createdby = #{createdby,jdbcType=VARCHAR},
+        updatedat = #{updatedat,jdbcType=TIMESTAMP},
+        updatedby = #{updatedby,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+</mapper>

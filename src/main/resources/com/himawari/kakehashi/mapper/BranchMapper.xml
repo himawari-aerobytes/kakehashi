@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.BranchMapper">
+    <resultMap id="BaseResultMap" type="com.himawari.kakehashi.domain.Branch">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <id column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <id column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="branch_name" jdbcType="VARCHAR" property="branchName"/>
+        <result column="name_bystudent" jdbcType="VARCHAR" property="nameBystudent"/>
+        <result column="updatedby" jdbcType="VARCHAR" property="updatedby"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        id, headquarter_id, ward_id, zone_id, branch_name, name_bystudent, updatedby, createdby,
+        createdat, updatedat
+    </sql>
+    <select id="selectByExample" parameterType="com.himawari.kakehashi.domain.BranchExample" resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from branch
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <include refid="Base_Column_List"/>
+        from branch
+        where id = #{id,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from branch
+        where id = #{id,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.himawari.kakehashi.domain.BranchExample">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from branch
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Branch"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into branch (headquarter_id, ward_id, zone_id,
+        branch_name, name_bystudent, updatedby,
+        createdby, createdat, updatedat
+        )
+        values (#{headquarterId,jdbcType=INTEGER}, #{wardId,jdbcType=INTEGER}, #{zoneId,jdbcType=INTEGER},
+        #{branchName,jdbcType=VARCHAR}, #{nameBystudent,jdbcType=VARCHAR}, #{updatedby,jdbcType=VARCHAR},
+        #{createdby,jdbcType=VARCHAR}, #{createdat,jdbcType=TIMESTAMP}, #{updatedat,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Branch"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into branch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="headquarterId != null">
+                headquarter_id,
+            </if>
+            <if test="wardId != null">
+                ward_id,
+            </if>
+            <if test="zoneId != null">
+                zone_id,
+            </if>
+            <if test="branchName != null">
+                branch_name,
+            </if>
+            <if test="nameBystudent != null">
+                name_bystudent,
+            </if>
+            <if test="updatedby != null">
+                updatedby,
+            </if>
+            <if test="createdby != null">
+                createdby,
+            </if>
+            <if test="createdat != null">
+                createdat,
+            </if>
+            <if test="updatedat != null">
+                updatedat,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="headquarterId != null">
+                #{headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="wardId != null">
+                #{wardId,jdbcType=INTEGER},
+            </if>
+            <if test="zoneId != null">
+                #{zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="branchName != null">
+                #{branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="nameBystudent != null">
+                #{nameBystudent,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedby != null">
+                #{updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdby != null">
+                #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdat != null">
+                #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedat != null">
+                #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.himawari.kakehashi.domain.BranchExample" resultType="java.lang.Long">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select count(*) from branch
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update branch
+        <set>
+            <if test="row.id != null">
+                id = #{row.id,jdbcType=INTEGER},
+            </if>
+            <if test="row.headquarterId != null">
+                headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="row.wardId != null">
+                ward_id = #{row.wardId,jdbcType=INTEGER},
+            </if>
+            <if test="row.zoneId != null">
+                zone_id = #{row.zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="row.branchName != null">
+                branch_name = #{row.branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="row.nameBystudent != null">
+                name_bystudent = #{row.nameBystudent,jdbcType=VARCHAR},
+            </if>
+            <if test="row.updatedby != null">
+                updatedby = #{row.updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="row.createdby != null">
+                createdby = #{row.createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="row.createdat != null">
+                createdat = #{row.createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="row.updatedat != null">
+                updatedat = #{row.updatedat,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update branch
+        set id = #{row.id,jdbcType=INTEGER},
+        headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+        ward_id = #{row.wardId,jdbcType=INTEGER},
+        zone_id = #{row.zoneId,jdbcType=INTEGER},
+        branch_name = #{row.branchName,jdbcType=VARCHAR},
+        name_bystudent = #{row.nameBystudent,jdbcType=VARCHAR},
+        updatedby = #{row.updatedby,jdbcType=VARCHAR},
+        createdby = #{row.createdby,jdbcType=VARCHAR},
+        createdat = #{row.createdat,jdbcType=TIMESTAMP},
+        updatedat = #{row.updatedat,jdbcType=TIMESTAMP}
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.himawari.kakehashi.domain.Branch">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update branch
+        <set>
+            <if test="branchName != null">
+                branch_name = #{branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="nameBystudent != null">
+                name_bystudent = #{nameBystudent,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedby != null">
+                updatedby = #{updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdby != null">
+                createdby = #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdat != null">
+                createdat = #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedat != null">
+                updatedat = #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.himawari.kakehashi.domain.Branch">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update branch
+        set branch_name = #{branchName,jdbcType=VARCHAR},
+        name_bystudent = #{nameBystudent,jdbcType=VARCHAR},
+        updatedby = #{updatedby,jdbcType=VARCHAR},
+        createdby = #{createdby,jdbcType=VARCHAR},
+        createdat = #{createdat,jdbcType=TIMESTAMP},
+        updatedat = #{updatedat,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+</mapper>

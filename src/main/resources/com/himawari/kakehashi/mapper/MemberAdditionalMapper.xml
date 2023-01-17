@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.MemberAdditionalMapper">
+    <resultMap id="selectMemberMap" type="com.himawari.kakehashi.domain.MemberAdditional">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="citizen_id" jdbcType="INTEGER" property="citizenId"/>
+        <result column="municipality" jdbcType="VARCHAR" property="municipality"/>
+        <result column="prefecture" jdbcType="VARCHAR" property="prefecture"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="position_name" jdbcType="VARCHAR" property="positionName"/>
+        <result column="examination_id" jdbcType="INTEGER" property="examinationId"/>
+        <result column="examination_name" jdbcType="VARCHAR" property="examinationName"/>
+        <result column="school_id" jdbcType="INTEGER" property="schoolId"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="district_id" jdbcType="INTEGER" property="districtId"/>
+        <result column="district_name" jdbcType="VARCHAR" property="districtName"/>
+        <result column="branch_id" jdbcType="INTEGER" property="branchId"/>
+        <result column="branch_name" jdbcType="VARCHAR" property="branchName"/>
+        <result column="branch_name_bystudent" jdbcType="VARCHAR" property="branchNameBystudent"/>
+        <result column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <result column="headquarter_name" jdbcType="VARCHAR" property="headquarterName"/>
+        <result column="headquarter_name_bystudent" jdbcType="VARCHAR" property="headquarterNameBystudent"/>
+        <result column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <result column="ward_name" jdbcType="VARCHAR" property="wardName"/>
+        <result column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="zone_name" jdbcType="VARCHAR" property="zoneName"/>
+        <result column="updatedby" jdbcType="VARCHAR" property="updatedby"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+    </resultMap>
+    <select id="selectMemberAll" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+    </select>
+
+    <select id="selectMemberZone" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+    </select>
+
+    <select id="selectMemberWard" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+        AND member.ward_id = #{wardId}
+    </select>
+
+    <select id="selectMemberHeadquarter" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+        AND member.ward_id = #{wardId}
+        AND member.headquarter_id = #{headquarterId}
+    </select>
+
+
+    <!--追加-->
+    <select id="selectMemberAllById" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.id = #{memberId}
+    </select>
+
+    <select id="selectMemberZoneById" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+        AND member.id = #{memberId}
+    </select>
+
+    <select id="selectMemberWardById" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+        AND member.ward_id = #{wardId}
+        AND member.id = #{memberId}
+    </select>
+
+    <select id="selectMemberHeadquarterById" parameterType="com.himawari.kakehashi.domain.MemberAdditional"
+            resultMap="selectMemberMap">
+        SELECT member.id
+        ,citizen_id
+        ,municipality
+        ,prefecture
+        ,position_id
+        ,position_name
+        ,examination_id
+        ,examination_name
+        ,school_id
+        ,school_name
+        ,district_id
+        ,district_name
+        ,member.branch_id branch_id
+        ,branch_name
+        ,branch.name_bystudent branch_name_bystudent
+        ,member.headquarter_id headquarter_id
+        ,headquarter_name
+        ,headquarter.name_bystudent headquarter_name_bystudent
+        ,member.ward_id ward_id
+        ,ward_name
+        ,member.zone_id zone_id
+        ,zone_name
+        ,member.updatedby updatedby
+        ,member.updatedat updatedat
+        ,member.createdby createdby
+        ,member.createdat createdat
+        FROM member
+        INNER JOIN citizen
+        ON member.citizen_id = citizen.id
+        INNER JOIN position
+        ON member.position_id = position.id
+        INNER JOIN examination
+        ON member.examination_id = examination.id
+        INNER JOIN school
+        ON member.school_id = school.id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE member.zone_id = #{zoneId}
+        AND member.ward_id = #{wardId}
+        AND member.headquarter_id = #{headquarterId}
+        AND member.id = #{memberId}
+    </select>
+
+</mapper>

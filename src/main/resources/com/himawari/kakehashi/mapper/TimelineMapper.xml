@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.TimelineMapper">
+    <resultMap id="BaseResultMap" type="com.himawari.kakehashi.domain.Timeline">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <id column="district_id" jdbcType="INTEGER" property="districtId"/>
+        <id column="branch_id" jdbcType="INTEGER" property="branchId"/>
+        <id column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <id column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <id column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="updatedby" jdbcType="VARCHAR" property="updatedby"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        id, member_id, district_id, branch_id, headquarter_id, ward_id, zone_id, `comment`,
+        updatedby, createdby, createdat, updatedat, img
+    </sql>
+    <select id="selectByExample" parameterType="com.himawari.kakehashi.domain.TimelineExample"
+            resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from timeline
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select
+        <include refid="Base_Column_List"/>
+        from timeline
+        where id = #{id,jdbcType=INTEGER}
+        and member_id = #{memberId,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from timeline
+        where id = #{id,jdbcType=INTEGER}
+        and member_id = #{memberId,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.himawari.kakehashi.domain.TimelineExample">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        delete from timeline
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Timeline"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into timeline (member_id, district_id, branch_id,
+        headquarter_id, ward_id, zone_id,
+        `comment`, updatedby, createdby,
+        createdat, updatedat, img
+        )
+        values (#{memberId,jdbcType=INTEGER}, #{districtId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER},
+        #{headquarterId,jdbcType=INTEGER}, #{wardId,jdbcType=INTEGER}, #{zoneId,jdbcType=INTEGER},
+        #{comment,jdbcType=VARCHAR}, #{updatedby,jdbcType=VARCHAR}, #{createdby,jdbcType=VARCHAR},
+        #{createdat,jdbcType=TIMESTAMP}, #{updatedat,jdbcType=TIMESTAMP}, #{img,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.himawari.kakehashi.domain.Timeline"
+            useGeneratedKeys="true">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        insert into timeline
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="districtId != null">
+                district_id,
+            </if>
+            <if test="branchId != null">
+                branch_id,
+            </if>
+            <if test="headquarterId != null">
+                headquarter_id,
+            </if>
+            <if test="wardId != null">
+                ward_id,
+            </if>
+            <if test="zoneId != null">
+                zone_id,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+            <if test="updatedby != null">
+                updatedby,
+            </if>
+            <if test="createdby != null">
+                createdby,
+            </if>
+            <if test="createdat != null">
+                createdat,
+            </if>
+            <if test="updatedat != null">
+                updatedat,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null">
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="branchId != null">
+                #{branchId,jdbcType=INTEGER},
+            </if>
+            <if test="headquarterId != null">
+                #{headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="wardId != null">
+                #{wardId,jdbcType=INTEGER},
+            </if>
+            <if test="zoneId != null">
+                #{zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedby != null">
+                #{updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdby != null">
+                #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdat != null">
+                #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedat != null">
+                #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.himawari.kakehashi.domain.TimelineExample"
+            resultType="java.lang.Long">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        select count(*) from timeline
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update timeline
+        <set>
+            <if test="row.id != null">
+                id = #{row.id,jdbcType=INTEGER},
+            </if>
+            <if test="row.memberId != null">
+                member_id = #{row.memberId,jdbcType=INTEGER},
+            </if>
+            <if test="row.districtId != null">
+                district_id = #{row.districtId,jdbcType=INTEGER},
+            </if>
+            <if test="row.branchId != null">
+                branch_id = #{row.branchId,jdbcType=INTEGER},
+            </if>
+            <if test="row.headquarterId != null">
+                headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+            </if>
+            <if test="row.wardId != null">
+                ward_id = #{row.wardId,jdbcType=INTEGER},
+            </if>
+            <if test="row.zoneId != null">
+                zone_id = #{row.zoneId,jdbcType=INTEGER},
+            </if>
+            <if test="row.comment != null">
+                `comment` = #{row.comment,jdbcType=VARCHAR},
+            </if>
+            <if test="row.updatedby != null">
+                updatedby = #{row.updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="row.createdby != null">
+                createdby = #{row.createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="row.createdat != null">
+                createdat = #{row.createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="row.updatedat != null">
+                updatedat = #{row.updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="row.img != null">
+                img = #{row.img,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update timeline
+        set id = #{row.id,jdbcType=INTEGER},
+        member_id = #{row.memberId,jdbcType=INTEGER},
+        district_id = #{row.districtId,jdbcType=INTEGER},
+        branch_id = #{row.branchId,jdbcType=INTEGER},
+        headquarter_id = #{row.headquarterId,jdbcType=INTEGER},
+        ward_id = #{row.wardId,jdbcType=INTEGER},
+        zone_id = #{row.zoneId,jdbcType=INTEGER},
+        `comment` = #{row.comment,jdbcType=VARCHAR},
+        updatedby = #{row.updatedby,jdbcType=VARCHAR},
+        createdby = #{row.createdby,jdbcType=VARCHAR},
+        createdat = #{row.createdat,jdbcType=TIMESTAMP},
+        updatedat = #{row.updatedat,jdbcType=TIMESTAMP},
+        img = #{row.img,jdbcType=VARCHAR}
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.himawari.kakehashi.domain.Timeline">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update timeline
+        <set>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedby != null">
+                updatedby = #{updatedby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdby != null">
+                createdby = #{createdby,jdbcType=VARCHAR},
+            </if>
+            <if test="createdat != null">
+                createdat = #{createdat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedat != null">
+                updatedat = #{updatedat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        and member_id = #{memberId,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.himawari.kakehashi.domain.Timeline">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        update timeline
+        set `comment` = #{comment,jdbcType=VARCHAR},
+        updatedby = #{updatedby,jdbcType=VARCHAR},
+        createdby = #{createdby,jdbcType=VARCHAR},
+        createdat = #{createdat,jdbcType=TIMESTAMP},
+        updatedat = #{updatedat,jdbcType=TIMESTAMP},
+        img = #{img,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+        and member_id = #{memberId,jdbcType=INTEGER}
+        and district_id = #{districtId,jdbcType=INTEGER}
+        and branch_id = #{branchId,jdbcType=INTEGER}
+        and headquarter_id = #{headquarterId,jdbcType=INTEGER}
+        and ward_id = #{wardId,jdbcType=INTEGER}
+        and zone_id = #{zoneId,jdbcType=INTEGER}
+    </update>
+</mapper>

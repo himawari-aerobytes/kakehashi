@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.LoginUserAdditionalMapper">
+    <resultMap id="selectUserMap" type="com.himawari.kakehashi.domain.LoginUserAdditional">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="isEnabled" jdbcType="INTEGER" property="isEnabled"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="district_id" jdbcType="INTEGER" property="districtId"/>
+        <result column="district_name" jdbcType="VARCHAR" property="districtName"/>
+        <result column="branch_id" jdbcType="INTEGER" property="branchId"/>
+        <result column="branch_name" jdbcType="VARCHAR" property="branchName"/>
+        <result column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <result column="headquarter_name" jdbcType="VARCHAR" property="headquarterName"/>
+        <result column="ward_id" jdbcType="INTEGER" property="wardId"/>
+        <result column="ward_name" jdbcType="VARCHAR" property="wardName"/>
+        <result column="zone_id" jdbcType="INTEGER" property="zoneId"/>
+        <result column="zone_name" jdbcType="VARCHAR" property="zoneName"/>
+    </resultMap>
+    <select id="selectUser" parameterType="com.himawari.kakehashi.domain.LoginUserAdditional"
+            resultMap="selectUserMap">
+        <![CDATA[
+         SELECT l.id id
+        ,l.login_user_name name
+        ,l.email email
+        ,r.role_name role
+        ,l.isEnabled isEnabled
+        ,member.id member_id
+        ,member.member_name member_name
+        ,member.district_id district_id
+        ,district.district_name district_name
+        ,member.branch_id branch_id
+        ,branch.branch_name branch_name
+        ,member.headquarter_id headquarter_id
+        ,headquarter.headquarter_name
+        ,member.ward_id ward_id
+        ,ward.ward_name ward_name
+        ,member.zone_id zone_id
+        ,zone.zone_name zone_name
+        FROM login_user l
+        INNER JOIN role r
+        ON r.id = l.role_id
+        INNER JOIN member
+        ON member.id = l.member_id
+        INNER JOIN district
+        ON member.district_id = district.id
+        INNER JOIN branch
+        ON member.branch_id = branch.id
+        INNER JOIN headquarter
+        ON member.headquarter_id = headquarter.id
+        INNER JOIN ward
+        ON member.ward_id = ward.id
+        INNER JOIN zone
+        ON member.zone_id = zone.id
+        WHERE l.email = #{email} ]]>
+    </select>
+
+    <update id="updateRole">
+        UPDATE　user_role ur
+        SET role_id = (SELECT id FROM role WHERE role.name = #{role_name}
+        WHERE ur.user_id = (SELECT id FROM user WHERE ur.email = #{email} )
+    </update>
+</mapper>

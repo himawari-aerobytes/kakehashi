@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himawari.kakehashi.mapper.MemberSessionAdditionalMapper">
+    <resultMap id="selectMemberSessionAdditionalMap" type="com.himawari.kakehashi.domain.MemberSessionAdditional">
+        <!-- @mbg.generated: generated automatically, do not modify! -->
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <result column="visitedat" jdbcType="TIMESTAMP" property="visitedat"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="member_name" jdbcType="VARCHAR" property="memberName"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="member_zone_name" jdbcType="VARCHAR" property="memberZoneName"/>
+        <result column="member_zone_id" jdbcType="INTEGER" property="memberZoneId"/>
+        <result column="member_ward_name" jdbcType="VARCHAR" property="memberWardName"/>
+        <result column="member_ward_id" jdbcType="INTEGER" property="memberWardId"/>
+        <result column="member_headquarter_name" jdbcType="VARCHAR" property="memberHeadquarterName"/>
+        <result column="member_headquartername_bystudent" jdbcType="VARCHAR" property="memberHeadquarternameBystudent"/>
+        <result column="headquarter_id" jdbcType="INTEGER" property="headquarterId"/>
+        <result column="member_branch_name" jdbcType="VARCHAR" property="memberBranchName"/>
+        <result column="member_branch_name_bystudent" jdbcType="VARCHAR" property="memberBranchNameBystudent"/>
+        <result column="member_branch_id" jdbcType="INTEGER" property="memberBranchId"/>
+        <result column="adm_member_name" jdbcType="VARCHAR" property="admMemberName"/>
+        <result column="adm_member_id" jdbcType="INTEGER" property="admMemberId"/>
+        <result column="createdat" jdbcType="TIMESTAMP" property="createdat"/>
+        <result column="createdby" jdbcType="VARCHAR" property="createdby"/>
+        <result column="updatedat" jdbcType="TIMESTAMP" property="updatedat"/>
+        <result column="updatedby" jdbcType="VARCHAR" property="updatedby"/>
+    </resultMap>
+    <select id="selectMemberSessionAll" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+    </select>
+
+    <select id="selectMemberSessionZone" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+    </select>
+
+    <select id="selectMemberSessionWard" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+        AND m1.ward_id = #{wardId}
+    </select>
+
+    <select id="selectMemberSessionHeadquarter" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+        AND m1.ward_id = #{wardId}
+        AND m1.headquarter_id = #{headquarterId}
+    </select>
+
+    <!-- 複製 !-->
+
+    <select id="selectMemberSessionAllByMemberId" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE session.member_id = #{memberId}
+    </select>
+
+    <select id="selectMemberSessionZoneByMemberId" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+        AND session.member_id = #{memberId}
+    </select>
+
+    <select id="selectMemberSessionWardByMemberId" parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+        AND m1.ward_id = #{wardId}
+        AND session.member_id = #{memberId}
+    </select>
+
+    <select id="selectMemberSessionHeadquarterByMemberId"
+            parameterType="com.himawari.kakehashi.domain.MemberSessionAdditional"
+            resultMap="selectMemberSessionAdditionalMap">
+        SELECT session.id id
+        ,session.member_id member_id
+        ,session.note note
+        ,session.adm_member_id adm_member_Id
+        ,session.visitedat visitedat
+        ,session.type type
+        ,m1.member_name member_name
+        ,m1.id member_id
+        ,zone1.zone_name member_zone_name
+        ,m1.zone_id member_zone_id
+        ,ward1.ward_name member_ward_name
+        ,m1.ward_id member_ward_id
+        ,hdqrtr1.headquarter_name member_headquarter_name
+        ,hdqrtr1.name_bystudent member_headquartername_bystudent
+        ,m1.headquarter_id headquarter_id
+        ,branch1.branch_name member_branch_name
+        ,branch1.name_bystudent member_branch_name_bystudent
+        ,m1.branch_id member_branch_id
+        ,m2.member_name adm_member_name
+        ,m2.id adm_member_id
+        ,session.createdat createdat
+        ,session.createdby createdby
+        ,session.updatedat updatedat
+        ,session.updatedby updatedby
+        FROM member_session session
+        INNER JOIN member m1
+        ON session.member_id = m1.id
+        INNER JOIN zone zone1
+        ON m1.zone_id = zone1.id
+        INNER JOIN ward ward1
+        ON m1.ward_id = ward1.id
+        INNER JOIN headquarter hdqrtr1
+        ON m1.headquarter_id = hdqrtr1.id
+        INNER JOIN branch branch1
+        ON m1.branch_id = branch1.id
+        INNER JOIN member m2
+        ON session.adm_member_id = m2.id
+        INNER JOIN zone zone2
+        ON m2.zone_id = zone2.id
+        INNER JOIN ward ward2
+        ON m2.ward_id = ward2.id
+        INNER JOIN headquarter hdqrtr2
+        ON m2.headquarter_id = hdqrtr2.id
+        WHERE m1.zone_id = #{zoneId}
+        AND m1.ward_id = #{wardId}
+        AND m1.headquarter_id = #{headquarterId}
+        AND session.member_id = #{memberId}
+    </select>
+
+
+</mapper>
